@@ -1,37 +1,39 @@
-<div class="main-sidebar sidebar-style-2">
-    <aside id="sidebar-wrapper">
-      <div class="sidebar-brand">
-        <a href="index.html">Dashboard</a>
-      </div>
-      <div class="sidebar-brand sidebar-brand-sm">
-        <a href="index.html">H</a>
-      </div>
-      <ul class="sidebar-menu">
-        <li class="menu-header">Dashboard</li>
-        <li class="bav">
-          <a href="#" class="nav-link"><i class="bi bi-speedometer"></i><span>Dashboard</span></a>
-        </li>
-        <li class="menu-header">Starter</li>
-        <li class="active">
-          <a class="nav-link" href="blank.html"><i class="bi bi-app"></i><span>Blank Page</span></a>
-        </li>
-        <li class="nav">
-          <a href="#" class="nav-link"><i class="bi bi-bootstrap"></i><span>Bootstrap</span></a>
-        </li>
-        <li class="menu-header">Stisla</li>
-        <li class="nav">
-          <a href="#" class="nav-link"><i class="bi bi-ui-checks-grid"></i><span>Components</span></a>
-        </li>
-        <li class="nav">
-            <a href="#" class="nav-link"><i class="bi bi-textarea-resize"></i><span>Forms</span></a>
-        </li>
-        <li class="menu-header">Pages</li>
-        <li class="nav">
-          <a href="#" class="nav-link"><i class="bi bi-person"></i><span>Auth</span></a>
-        </li>
-        <li class="nav">
-            <a href="#" class="nav-link"><i class="bi bi-bug"></i><span>Errors</span></a>
-        </li>
-      </ul>
-    </aside>
-</div>
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-heading">Pages</li>
+    <li class="nav-item">
+      <a class="@if (Route::is('home')) nav-link @else nav-link collapsed @endif" href="{{ route('home') }}">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <!-- End Dashboard Nav -->
+
+    <li class="nav-heading">Menu</li>
+
+    <li class="nav-item">
+      <a class="@if (Route::is('kecamatan.index')) nav-link @else nav-link collapsed @endif" href="{{ route('kecamatan.index') }}">
+        <i class="bi bi-buildings"></i>
+        <span>Daftar Kecamatan</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="@if (Route::is('tahun.index')) nav-link @else nav-link collapsed @endif" href="{{ route('tahun.index') }}">
+        <i class="bi bi-calendar-range"></i>
+        <span>Periode Tahun</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="@if (Route::is('data.index')) nav-link @else nav-link collapsed @endif" href="{{ route('data.index') }}">
+        <i class="bi bi-briefcase"></i>
+        <span>Data Kasus</span>
+      </a>
+    </li>
+    <!-- End Profile Page Nav -->
+
+  </ul>
+
+</aside>
+<!-- End Sidebar-->

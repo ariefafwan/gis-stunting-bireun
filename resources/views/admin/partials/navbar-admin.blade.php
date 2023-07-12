@@ -1,30 +1,37 @@
-<nav class="navbar navbar-expand-lg main-navbar">
-    <form class="form-inline mr-auto">
-      <ul class="navbar-nav mr-3">
-        <li>
-          <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="bi bi-window-sidebar"></i></a>
+<nav class="header-nav ms-auto">
+  <ul class="d-flex align-items-center">
+
+    <li class="nav-item dropdown pe-3">
+
+      <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+        <img src="{{ asset('storage/profile/profil_img.jpg') }}" alt="Profile" class="rounded-circle">
+        <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+      </a><!-- End Profile Iamge Icon -->
+
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+        <li class="dropdown-header">
+          <h6>Hai! {{ Auth::user()->name }}</h6>
         </li>
         <li>
-          <a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="bi bi-search"></i></a>
+          <hr class="dropdown-divider">
+        </li>
+
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+            <i class="bi bi-person"></i>
+            <span>My Profile</span>
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="#">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Sign Out</span>
+          </a>
         </li>
       </ul>
-      <div class="search-element">
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250" />
-        <button class="btn" type="submit"><i class="bi bi-search"></i></button>
-      </div>
-    </form>
-    <ul class="navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-          <img alt="profil" src="{{ asset('storage/profile/profil_img.jpg') }}" class="rounded-circle mr-1" />
-          <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
-        <div class="dropdown-menu dropdown-menu-right">
-          <div class="dropdown-title">Menu</div>
-            <a href="#" class="dropdown-item has-icon"><i class="bi bi-person-circle"></i>&nbspProfile</a>
-            <a href="#" class="dropdown-item has-icon"><i class="bi bi-gear"></i>&nbspSettings</a>
-            <div class="dropdown-divider"></div>
-            <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger"><i class="bi bi-door-open"></i>&nbspLogout</a>
-        </div>
-      </li>
-    </ul>
+      <!-- End Profile Dropdown Items -->
+    </li>
+    <!-- End Profile Nav -->
+  </ul>
 </nav>
+<!-- End Icons Navigation -->
