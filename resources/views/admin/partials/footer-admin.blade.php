@@ -1,8 +1,9 @@
-<footer class="main-footer">
-    <div class="footer-left">
-      Copyright &copy; 2023
-      <div class="bullet"></div>
-      <a href="https://github.com/ariefafwan">Teuku M Arief Afwan</a>
-    </div>
-    <div class="footer-right"></div>
+<footer id="footer" class="footer py-4 bg-light mt-auto">
+  <div class="container-fluid px-4">
+      <div class="d-flex align-items-center justify-content-center small">
+        <div class="copyright">
+          &copy; Copyright <strong><span>GIS Stunting Kab. Bireun</span></strong>. All Rights Reserved
+        </div>
+      </div>
+  </div>
 </footer>
