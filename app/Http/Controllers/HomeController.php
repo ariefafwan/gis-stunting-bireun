@@ -29,20 +29,17 @@ class HomeController extends Controller
         $page = "Dashboard Admin";
         $datakecamatan = Kecamatan::all()->count();
         $data = Data::select('kecamatan_id')
-            ->selectRaw("SUM(jumlah_kasus_pendek) as total_kasus_pendek")
-            ->selectRaw("SUM(jumlah_kasus_sangatpendek) as total_kasus_sangatpendek")
+            ->selectRaw("SUM(jumlah_kasus_pendek) + SUM(jumlah_kasus_sangatpendek) as total_kasus")
             ->groupBy('kecamatan_id')
             ->orderBy('kecamatan_id')
             ->get();
-        $tahunmin = PeriodeTahun::has('data')
+        $tahun = PeriodeTahun::has('data')
             ->selectRaw("MIN(tahun) as tahun_min")
-            ->get();
-        $tahunmax = PeriodeTahun::has('data')
             ->selectRaw("MAX(tahun) as tahun_max")
             ->get();
         $datakasuspendek = Data::selectRaw("SUM(jumlah_kasus_pendek) as total_kasus_pendek")->get();
         $datakasussangatpendek = Data::selectRaw("SUM(jumlah_kasus_sangatpendek) as total_kasus_sangatpendek")->get();
-        // dd($tahunmax[0]->tahun_max);
-        return view('admin.dashboard', compact('page', 'data', 'datakasuspendek', 'datakasussangatpendek', 'datakecamatan', 'tahunmin', 'tahunmax'));
+        // dd($data[0]->total_kasus);
+        return view('admin.dashboard', compact('page', 'data', 'datakasuspendek', 'datakasussangatpendek', 'datakecamatan', 'tahun'));
     }
 }

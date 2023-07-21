@@ -51,7 +51,7 @@
         <div class="col-xxl-4 col-md-4">
           <div class="card info-card sales-card">
             <div class="card-body">
-              <h5 class="card-title">Total Kecamatan Diketahui<span> ({{ $tahunmin[0]->tahun_min }} s/d {{ $tahunmax[0]->tahun_max }})</span></h5>
+              <h5 class="card-title">Total Kecamatan Diketahui<span> ({{ $tahun[0]->tahun_min }} s/d {{ $tahun[0]->tahun_max }})</span></h5>
   
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -69,7 +69,7 @@
         <div class="col-xxl-4 col-md-4">
           <div class="card info-card sales-card">
             <div class="card-body">
-              <h5 class="card-title">Total Kasus Pendek <span> ({{ $tahunmin[0]->tahun_min }} s/d {{ $tahunmax[0]->tahun_max }})</span></h5>
+              <h5 class="card-title">Total Kasus Pendek <span> ({{ $tahun[0]->tahun_min }} s/d {{ $tahun[0]->tahun_max }})</span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -87,7 +87,7 @@
         <div class="col-xxl-4 col-md-4">
           <div class="card info-card sales-card">
             <div class="card-body">
-              <h5 class="card-title">Total Kasus Sangat Pendek <span> ({{ $tahunmin[0]->tahun_min }} s/d {{ $tahunmax[0]->tahun_max }})</span></h5>
+              <h5 class="card-title">Total Kasus Sangat Pendek <span> ({{ $tahun[0]->tahun_min }} s/d {{ $tahun[0]->tahun_max }})</span></h5>
   
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -123,8 +123,7 @@
 
     legend.onAdd = function(map) {
     var div = L.DomUtil.create("div", "legend");
-    div.innerHTML += "<h4>Skala Pembangunan</h4>";
-    // div.innerHTML += "<h3>Periode Tahun : {{ $tahunmin[0]->tahun_min }} s/d {{ $tahunmax[0]->tahun_max }}</h3>";
+    div.innerHTML += "<h4>Klaster Penyebaran {{ $tahun[0]->tahun_min }} s/d {{ $tahun[0]->tahun_max }}</h4>";
     div.innerHTML += '<i style="background: #8B0000"></i><span>1-20</span><br>';
     div.innerHTML += '<i style="background: #FF4500"></i><span>21-40</span><br>';
     div.innerHTML += '<i style="background: #FFFF00"></i><span>41-60</span><br>';
@@ -142,20 +141,25 @@
     //                     <option style="background-color: #00FF7F" value="#00FF7F">61-80</option>
     //                     <option class="text-white" style="background-color: #006400" value="#006400">81-100</option>
 
+  
     <?php foreach ($data as $key => $row) { ?>
         $.getJSON("storage/geojson/{{ $row->kecamatan->geojson }}", function(data) {
+          if ({{ $row->total_kasus }} <= 10) {
+            var color = "#FFFF00"
+          } else if  ({{ $row->total_kasus }} >= 11 ){
+            var color = "#00FF7F"
+          }
             geoLayer = L.geoJson(data, {
             style: function(feature) {
                 return {
-                    "color": "{{ $row->pembangunan }}",
+                    "color": color,
                     "weight": 1,
                     "fillOpacity": 0.8,
-                    // fillColor: '{{ $row->pembangunan }}',
                 }
             },
         }).addTo(map);
             geoLayer.eachLayer(function(layer) {
-                layer.bindPopup("{{ $row->kecamatan->nama_kecamatan }}");
+                layer.bindPopup("<span>Kec. : {{ $row->kecamatan->nama_kecamatan }}</span><br><span>Total Kasus : {{ $row->total_kasus }}</span>");
             });
         });
     <?php } ?>

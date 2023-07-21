@@ -22,7 +22,7 @@
                             <div class="col-md-2 mb-3">
                                 <div class="form-group">
                                     <label>Pilih Tahun</label>
-                                    <select class="form-select jenis_kelamin" name="">
+                                    <select class="form-select tahun" name="">
                                         @foreach ($tahun as $index)
                                         <option value="{{ $index->tahun }}">{{ $index->tahun }}</option>
                                         @endforeach
@@ -132,10 +132,10 @@
         
 	    function filterData () {
 		    $('#datatable').DataTable().search(
-		        $('.jenis_kelamin').val()
+		        $('.tahun').val()
 		    	).draw();
 		}
-		$('.jenis_kelamin').on('change', function () {
+		$('.tahun').on('change', function () {
 	        filterData();
 	    });
 	});
