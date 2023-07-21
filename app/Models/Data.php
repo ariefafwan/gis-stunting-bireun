@@ -20,4 +20,19 @@ class Data extends Model
     {
         return $this->belongsTo(PeriodeTahun::class);
     }
+
+    // public static function getJenisNameAttribute()
+    // {
+    //     $data = Data::select('kecamatan_id')
+    //         ->selectRaw("SUM(jumlah_kasus_pendek) + SUM(jumlah_kasus_sangatpendek) as total_kasus")
+    //         ->groupBy('kecamatan_id')
+    //         ->orderBy('kecamatan_id')
+    //         ->get();
+
+    //     if ($data->total_kasus <= 10) {
+    //         return "#00FF7F";
+    //     } elseif ($data->total_kasus <= 10) {
+    //         return "#FFFF00";
+    //     }
+    // }
 }
