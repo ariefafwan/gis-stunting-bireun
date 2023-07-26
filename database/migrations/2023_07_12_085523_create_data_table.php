@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('kecamatan_id')->unsigned();
             $table->foreign('kecamatan_id')->references('id')->on('kecamatans')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('cluster_id')->unsigned();
+            $table->foreign('cluster_id')->references('id')->on('clusters')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('periode_tahun_id')->unsigned();
             $table->foreign('periode_tahun_id')->references('id')->on('periode_tahuns')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('jumlah_anak');

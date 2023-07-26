@@ -26,6 +26,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="@if (Route::is('cluster.index')) nav-link @else nav-link collapsed @endif" href="{{ route('cluster.index') }}">
+        <i class="bi bi-code-square"></i>
+        <span>Data Cluster</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="@if (Route::is('data.index')) nav-link @else nav-link collapsed @endif" href="{{ route('data.index') }}">
         <i class="bi bi-briefcase"></i>
         <span>Data Kasus</span>

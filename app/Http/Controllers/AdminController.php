@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\DataExport;
 use App\Imports\DataImport;
+use App\Models\Cluster;
 use App\Models\Data;
 use App\Models\Kecamatan;
 use App\Models\PeriodeTahun;
@@ -15,12 +16,13 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $data = Data::paginate(10);
+        $data = Data::all();
         $periode = PeriodeTahun::all();
         $kecamatan = Kecamatan::all();
         $tahun = PeriodeTahun::select('tahun')->get();
         $page = "Data Penyebaran Stunting";
-        return view('admin.data.index', compact('data', 'page', 'periode', 'kecamatan', 'tahun'));
+        $cluster = Cluster::all();
+        return view('admin.data.index', compact('data', 'page', 'periode', 'kecamatan', 'tahun', 'cluster'));
     }
 
     public function store(Request $request)
