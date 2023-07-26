@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cluster;
 use App\Models\Data;
 use App\Models\Kecamatan;
 use App\Models\PeriodeTahun;
@@ -39,7 +40,8 @@ class HomeController extends Controller
             ->get();
         $datakasuspendek = Data::selectRaw("SUM(jumlah_kasus_pendek) as total_kasus_pendek")->get();
         $datakasussangatpendek = Data::selectRaw("SUM(jumlah_kasus_sangatpendek) as total_kasus_sangatpendek")->get();
+        $cluster = Cluster::all();
         // dd($data[0]->total_kasus);
-        return view('admin.dashboard', compact('page', 'data', 'datakasuspendek', 'datakasussangatpendek', 'datakecamatan', 'tahun'));
+        return view('admin.dashboard', compact('page', 'data', 'datakasuspendek', 'datakasussangatpendek', 'datakecamatan', 'tahun', 'cluster'));
     }
 }

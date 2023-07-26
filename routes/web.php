@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\ConfirmPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ClusterController;
 use App\Http\Controllers\KecamatanController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/destroydatakasus/{id}', [AdminController::class, 'destroy'])->name('data.destroy');
     Route::post('/getimportdata', [AdminController::class, 'importdata'])->name('data.import');
     Route::get('/getexportdata', [AdminController::class, 'exportdata'])->name('data.export');
+
+    //cluster 
+    Route::get('/admin/datacluster', [ClusterController::class, 'index'])->name('cluster.index');
+    Route::get('/admin/iddatacluster/{id}', [ClusterController::class, 'edit'])->name('cluster.edit');
+    Route::post('/admin/storedatacluster', [ClusterController::class, 'store'])->name('cluster.store');
+    Route::post('/admin/updatedatacluster', [ClusterController::class], 'update')->name('cluster.update');
+    Route::post('/admin/destroydatacluster/{id}', [ClusterController::class, 'destroy'])->name('cluster.destroy');
 });
 
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');

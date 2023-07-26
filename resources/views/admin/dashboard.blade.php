@@ -111,7 +111,7 @@
 @section('js')
 <script>
 
-    let map = L.map('map').setView([5.1870145, 96.709634], 12);
+    let map = L.map('map').setView([5.1870145, 96.709634], 10);
     
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -124,11 +124,10 @@
     legend.onAdd = function(map) {
     var div = L.DomUtil.create("div", "legend");
     div.innerHTML += "<h4>Klaster Penyebaran {{ $tahun[0]->tahun_min }} s/d {{ $tahun[0]->tahun_max }}</h4>";
-    div.innerHTML += '<i style="background: #8B0000"></i><span>1-20</span><br>';
-    div.innerHTML += '<i style="background: #FF4500"></i><span>21-40</span><br>';
-    div.innerHTML += '<i style="background: #FFFF00"></i><span>41-60</span><br>';
-    div.innerHTML += '<i style="background: #00FF7F"></i><span>61-80</span><br>';
-    div.innerHTML += '<i style="background: #006400"></i><span>81-100</span><br>';
+
+    <?php foreach ($cluster as $index => $any) { ?>
+        div.innerHTML += '<i style="background: {{ $any->warna }}"></i><span>{{ $any->nama_cluster }} : {{ $any->jarak_terdekat }} - {{ $any->jarak_terjauh }}</span><br>';
+    <?php } ?>
 
     return div;
     };

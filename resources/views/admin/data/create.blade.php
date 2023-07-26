@@ -28,6 +28,15 @@
                     </select>
                 </div>
                 <div class="mb-3">
+                    <label for="cluster_id" class="form-label fw-bold">Kecamatan</label>
+                    <select class="form-select" id="cluster_id" name="cluster_id" aria-label="Default select example">
+                        <option selected>Pilih Cluster</option>
+                        @foreach ($cluster as $clus)
+                            <option value="{{ $clus->id }}">{{ $clus->nama_cluster }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label for="jumlah_anak" class="form-label fw-bold">Jumlah Anak</label>
                     <input type="number" class="form-control" id="jumlah_anak" name="jumlah_anak" placeholder="Masukkan Jumlah Anak...">
                 </div>

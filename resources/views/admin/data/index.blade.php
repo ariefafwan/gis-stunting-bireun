@@ -36,6 +36,7 @@
                                             <th>#</th>
                                             <th>Tahun Kasus</th>
                                             <th>Kecamatan</th>
+                                            <th>Cluster</th>
                                             <th>Jumlah Anak</th>
                                             <th>Jumlah Kasus Pendek</th>
                                             <th>Jumlah Kasus Sangat Pendek</th>
@@ -45,9 +46,10 @@
                                     <tbody>
                                         @foreach ($data as $index => $row)
                                         <tr>
-                                            <td align="center" scope="row">{{ $data->count() * ($data->currentPage() - 1) + $loop->iteration }}</td>
+                                            <td align="center" scope="row">{{ $loop->iteration }}</td>
                                             <td>{{ $row->periode_tahun->tahun }}</td>
                                             <td>{{ $row->kecamatan->nama_kecamatan }}</td>
+                                            <td>{{ $row->cluster->nama_cluster }}</td>
                                             <td>{{ $row->jumlah_anak }}</td>
                                             <td>{{ $row->jumlah_kasus_pendek }}</td>
                                             <td>{{ $row->jumlah_kasus_sangatpendek }}</td>
@@ -117,6 +119,7 @@
         $('#editid').val(data.id);
         $('#editperiode').val(data.periode_tahun_id);
         $('#editkecamatan').val(data.kecamatan_id);
+        $('#editcluster').val(data.cluster_id);
         $('#editjumlahanak').val(data.jumlah_anak);
         $('#editjumlahpendek').val(data.jumlah_kasus_pendek);
         $('#editjumlahsangatpendek').val(data.jumlah_kasus_sangatpendek);
