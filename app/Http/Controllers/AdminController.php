@@ -31,12 +31,14 @@ class AdminController extends Controller
             'kecamatan_id' => 'required',
             'periode_tahun_id' => 'required',
             'jumlah_anak' => 'required',
+            'cluster_id' => 'required',
             'jumlah_kasus_pendek' => 'required',
             'jumlah_kasus_sangatpendek' => 'required',
         ]);
 
         $data = new Data();
         $data->kecamatan_id = $request->kecamatan_id;
+        $data->cluster_id = $request->cluster_id;
         $data->periode_tahun_id = $request->periode_tahun_id;
         $data->jumlah_anak = $request->jumlah_anak;
         $data->jumlah_kasus_pendek = $request->jumlah_kasus_pendek;
@@ -60,12 +62,14 @@ class AdminController extends Controller
             'kecamatan_id' => 'required',
             'periode_tahun_id' => 'required',
             'jumlah_anak' => 'required',
+            'cluster_id' => 'required',
             'jumlah_kasus_pendek' => 'required',
             'jumlah_kasus_sangatpendek' => 'required',
         ]);
 
         $data = Data::findOrFail($request->id);
         $data->kecamatan_id = $request->kecamatan_id;
+        $data->cluster_id = $request->cluster_id;
         $data->periode_tahun_id = $request->periode_tahun_id;
         $data->jumlah_anak = $request->jumlah_anak;
         $data->jumlah_kasus_pendek = $request->jumlah_kasus_pendek;

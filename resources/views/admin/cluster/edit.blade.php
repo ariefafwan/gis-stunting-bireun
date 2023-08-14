@@ -15,12 +15,8 @@
                     <input type="text" class="form-control" id="editnamacluster" name="nama_cluster" placeholder="Masukkan Nama Cluster..." autofocus>
                 </div>
                 <div class="mb-3">
-                    <label for="editjarak_terdekat" class="form-label fw-bold">Jarak Terdekat</label>
-                    <input type="number" class="form-control" id="editjarak_terdekat" name="jarak_terdekat" required="required" placeholder="Masukkan Jarak...">
-                </div>
-                <div class="mb-3">
-                    <label for="editjarak_terjauh" class="form-label fw-bold">Jarak Terjauh</label>
-                    <input type="number" class="form-control" id="editjarak_terjauh" name="jarak_terjauh" required="required" placeholder="Masukkan Jarak...">
+                    <label for="editdesk" class="form-label fw-bold">Deskripsi</label>
+                    <input type="text" class="form-control" id="editdesk" name="desk" required="required" placeholder="Masukkan Desk...">
                 </div>
                 jarak_terjauh
                 <div class="mb-3">

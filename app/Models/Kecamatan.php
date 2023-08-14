@@ -15,4 +15,10 @@ class Kecamatan extends Model
     {
         return $this->hasMany(Data::class);
     }
+
+    public function getFileGeoAttribute()
+    {
+        $file = $this->geojson;
+        return asset('storage/geojson/' . $file);
+    }
 }
