@@ -29,9 +29,9 @@ class HomeController extends Controller
     {
         $page = "Dashboard Admin";
         $datakecamatan = Kecamatan::all()->count();
-        $data = Data::select('kecamatan_id')
+        $data = Data::select('kecamatan_id', 'cluster_id')
             ->selectRaw("SUM(jumlah_kasus_pendek) + SUM(jumlah_kasus_sangatpendek) as total_kasus")
-            ->groupBy('kecamatan_id')
+            ->groupBy('kecamatan_id', 'cluster_id')
             ->orderBy('kecamatan_id')
             ->get();
         $tahun = PeriodeTahun::has('data')

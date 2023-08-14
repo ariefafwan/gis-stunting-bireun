@@ -19,8 +19,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama Cluster</th>
-                                <th>Jarak Terdekat</th>
-                                <th>Jarak Terjauh</th>
+                                <th>Deskripsi</th>
                                 <th>Warna</th>
                                 <th>Aksi</th>
                             </tr>
@@ -30,8 +29,7 @@
                             <tr>
                                 <td scope="row">{{ $index + 1 }}</td>
                                 <td>{{ $row->nama_cluster }}</td>
-                                <td>{{ $row->jarak_terdekat }}</td>
-                                <td>{{ $row->jarak_terjauh }}</td>
+                                <td>{{ $row->desk }}</td>
                                 <td>{{ $row->warna }}</td>
                                 <td align="center" class="d-flex justify-content-evenly">
                                     <a href="#!" class="btn btn-warning edit" data-id="{{ $row->id }} data-bs-toggle="modal" data-bs-target="#editModal">
@@ -73,8 +71,7 @@
         $('#editid').val(data.id);
         $('#editnamacluster').val(data.nama_cluster);
         $('#editwarna').val(data.warna);
-        $('#editjarak_terdekat').val(data.jarak_terdekat);
-        $('#editjarak_terjauh').val(data.jarak_terjauh);
+        $('#editdesk').val(data.desk);
         $('#editModal').modal('show');
     }
     });

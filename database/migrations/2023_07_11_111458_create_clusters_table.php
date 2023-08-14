@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_cluster');
             $table->string('warna');
-            $table->float('jarak_terdekat');
-            $table->float('jarak_terjauh');
+            $table->string('desk');
             $table->timestamps();
         });
     }

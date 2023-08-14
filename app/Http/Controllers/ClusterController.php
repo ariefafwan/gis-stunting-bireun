@@ -19,16 +19,14 @@ class ClusterController extends Controller
     {
         $request->validate([
             'nama_cluster' => 'required',
-            'jarak_terjauh' => 'required',
-            'jarak_terdekat' => 'required',
+            'desk' => 'required',
             'warna' => 'required',
         ]);
 
         $data = new Cluster();
         $data->nama_cluster = $request->nama_cluster;
-        $data->jarak_terjauh = $request->jarak_terjauh;
-        $data->jarak_terdekat = $request->jarak_terdekat;
         $data->warna = $request->warna;
+        $data->desk = $request->desk;
         //save data
         $data->save();
 
@@ -46,16 +44,14 @@ class ClusterController extends Controller
     {
         $request->validate([
             'nama_cluster' => 'required',
-            'jarak_terjauh' => 'required',
-            'jarak_terdekat' => 'required',
+            'desk' => 'required',
             'warna' => 'required',
         ]);
 
         $data = Cluster::findOrFail($request->id);
         $data->nama_cluster = $request->nama_cluster;
-        $data->jarak_terjauh = $request->jarak_terjauh;
-        $data->jarak_terdekat = $request->jarak_terdekat;
         $data->warna = $request->warna;
+        $data->desk = $request->desk;
         //save data
         $data->save();
 

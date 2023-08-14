@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/datacluster', [ClusterController::class, 'index'])->name('cluster.index');
     Route::get('/admin/iddatacluster/{id}', [ClusterController::class, 'edit'])->name('cluster.edit');
     Route::post('/admin/storedatacluster', [ClusterController::class, 'store'])->name('cluster.store');
-    Route::post('/admin/updatedatacluster', [ClusterController::class], 'update')->name('cluster.update');
+    Route::post('/admin/updatedatacluster', [ClusterController::class, 'update'])->name('cluster.update');
     Route::post('/admin/destroydatacluster/{id}', [ClusterController::class, 'destroy'])->name('cluster.destroy');
 });
 

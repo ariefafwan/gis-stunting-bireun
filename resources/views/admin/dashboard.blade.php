@@ -126,7 +126,7 @@
     div.innerHTML += "<h4>Klaster Penyebaran {{ $tahun[0]->tahun_min }} s/d {{ $tahun[0]->tahun_max }}</h4>";
 
     <?php foreach ($cluster as $index => $any) { ?>
-        div.innerHTML += '<i style="background: {{ $any->warna }}"></i><span>{{ $any->nama_cluster }} : {{ $any->jarak_terdekat }} - {{ $any->jarak_terjauh }}</span><br>';
+        div.innerHTML += '<i style="background: {{ $any->warna }}"></i><span>{{ $any->nama_cluster }} : {{ $any->desk }}</span><br>';
     <?php } ?>
 
     return div;
@@ -134,24 +134,13 @@
 
     legend.addTo(map);
 
-    // <option class="text-white" style="background-color: #8B0000" value="#8B0000">1-20</option>
-    //                     <option class="text-white" style="background-color: #FF4500" value="#FF4500">21-40</option>
-    //                     <option style="background-color: #FFFF00" value="#FFFF00">41-60</option>
-    //                     <option style="background-color: #00FF7F" value="#00FF7F">61-80</option>
-    //                     <option class="text-white" style="background-color: #006400" value="#006400">81-100</option>
-
   
     <?php foreach ($data as $key => $row) { ?>
-        $.getJSON("storage/geojson/{{ $row->kecamatan->geojson }}", function(data) {
-          if ({{ $row->total_kasus }} <= 10) {
-            var color = "#FFFF00"
-          } else if  ({{ $row->total_kasus }} >= 11 ){
-            var color = "#00FF7F"
-          }
+        $.getJSON("{{ $row->kecamatan->FileGeo }}", function(data) {
             geoLayer = L.geoJson(data, {
             style: function(feature) {
                 return {
-                    "color": color,
+                    "color": "#FFFF00",
                     "weight": 1,
                     "fillOpacity": 0.8,
                 }
