@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ClusterController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KecamatanController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/destroyperiodetahun/{id}', [AdminController::class, 'tahundestroy'])->name('tahun.destroy');
 
     //data
+    Route::get('/admin/getdata', [HomeController::class, 'data'])->name('getdata');
     Route::get('/admin/daftardatakasus', [AdminController::class, 'index'])->name('data.index');
     Route::get('/admin/editdatakasus/{id}', [AdminController::class, 'edit'])->name('data.edit');
     Route::post('/admin/storedatakasus', [AdminController::class, 'store'])->name('data.store');

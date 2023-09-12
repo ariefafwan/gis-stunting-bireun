@@ -104,54 +104,153 @@
       </div>
     </div> 
   </div>
-  <h6>Peta Penyebaran</h6>
-  <div id="map"></div>
+  <h6 class="fw-bold">Peta Penyebaran</h6>
+  <div class="col-md-2 mb-3">
+    <form method="get">
+      <div class="form-group">
+        <label>Pilih Tahun</label>
+        <select id="filterdata" class="form-select tahun" name="">
+            @foreach ($pilihtahun as $index)
+            <option value="{{ $index->id }}">{{ $index->tahun }}</option>
+            @endforeach
+        </select>
+      </div>
+    </form>
+  </div>
+  <div id="petakasus">
+    <div id="map"></div>
+  </div>
 </section>
 @endsection
 @section('js')
-<script>
-
-    let map = L.map('map').setView([5.1870145, 96.709634], 10);
-    
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    /*Legend specific*/
-    var legend = L.control({ position: "bottomright" });
-
-    legend.onAdd = function(map) {
-    var div = L.DomUtil.create("div", "legend");
-    div.innerHTML += "<h4>Klaster Penyebaran {{ $tahun[0]->tahun_min }} s/d {{ $tahun[0]->tahun_max }}</h4>";
-
-    <?php foreach ($cluster as $index => $any) { ?>
-        div.innerHTML += '<i style="background: {{ $any->warna }}"></i><span>{{ $any->nama_cluster }} : {{ $any->desk }}</span><br>';
-    <?php } ?>
-
-    return div;
-    };
-
-    legend.addTo(map);
-
-  
-    <?php foreach ($data as $key => $row) { ?>
-        $.getJSON("{{ $row->kecamatan->FileGeo }}", function(data) {
-            geoLayer = L.geoJson(data, {
-            style: function(feature) {
-                return {
-                    "color": "#FFFF00",
-                    "weight": 1,
-                    "fillOpacity": 0.8,
-                }
-            },
-        }).addTo(map);
-            geoLayer.eachLayer(function(layer) {
-                layer.bindPopup("<span>Kec. : {{ $row->kecamatan->nama_kecamatan }}</span><br><span>Total Kasus : {{ $row->total_kasus }}</span>");
-            });
+{{-- <script>
+  $.ajax({
+            url: '/admin/getdata',
+            type: "GET",
+            dataType: "JSON",
+            success:function(res) {
+                console.log(res);
+            }
         });
-    <?php } ?>
+</script> --}}
+<script>
+  $(document).ready(function() {
+    $.ajax({
+            url: '/admin/getdata',
+            type: "GET",
+            dataType: "JSON",
+            success:function(res) {
+
+              // res = [...res];
+              let map = L.map('map').setView([5.1870145, 96.709634], 10);
+              // map.removeLayer(geojson);
     
+              layer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  maxZoom: 19,
+                  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              });
+
+              layer.addTo(map);
+
+              /*Legend specific*/
+              var legend = L.control({ position: "bottomright" });
+
+              legend.onAdd = function(map) {
+              var div = L.DomUtil.create("div", "legend");
+              div.innerHTML += "<h4>Klaster Penyebaran {{ $tahun[0]->tahun_min }} s/d {{ $tahun[0]->tahun_max }}</h4>";
+
+              <?php foreach ($cluster as $index => $any) { ?>
+                  div.innerHTML += '<i style="background: {{ $any->warna }}"></i><span>{{ $any->nama_cluster }} : {{ $any->desk }}</span><br>';
+              <?php } ?>
+
+              return div;
+              };
+
+              legend.addTo(map);
+
+              let tahun = $('#filterdata').val();
+              console.log(tahun);
+              res.filter((item) => {
+                  // let tes = item.periode_tahun_id.toString()
+                  return item.periode_tahun_id.toString().includes(tahun);
+                }).map((value, key) => {
+                  $.getJSON(value.filegeo, function(data) {
+                      geoLayer = L.geoJson(data, {
+                        style: function(feature) {
+                            return {
+                                "color": value.warna,
+                                "weight": 1,
+                                "fillOpacity": 0.8,
+                            }
+                        },
+                      }).addTo(map);
+                      geoLayer.eachLayer(function(layer) {
+                              layer.bindPopup(`<span>Kec. : ${value.nama_kecamatan}</span><br><span>Total Kasus : ${value.total_kasus}</span>`);
+                          });
+                  });
+                })
+            }
+        });
+        $('#filterdata').on("change", function() {
+          map.remove();
+          document.getElementById('petakasus').innerHTML = "<div id='map'></div>";
+          $.ajax({
+            url: '/admin/getdata',
+            type: "GET",
+            dataType: "JSON",
+            success:function(res) {
+
+              // res = [...res];
+              let map = L.map('map').setView([5.1870145, 96.709634], 10);
+              // map.removeLayer(geojson);
     
+              layer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  maxZoom: 19,
+                  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              });
+
+              layer.addTo(map);
+
+              /*Legend specific*/
+              var legend = L.control({ position: "bottomright" });
+
+              legend.onAdd = function(map) {
+              var div = L.DomUtil.create("div", "legend");
+              div.innerHTML += "<h4>Klaster Penyebaran {{ $tahun[0]->tahun_min }} s/d {{ $tahun[0]->tahun_max }}</h4>";
+
+              <?php foreach ($cluster as $index => $any) { ?>
+                  div.innerHTML += '<i style="background: {{ $any->warna }}"></i><span>{{ $any->nama_cluster }} : {{ $any->desk }}</span><br>';
+              <?php } ?>
+
+              return div;
+              };
+
+              legend.addTo(map);
+
+              let tahun = $('#filterdata').val();
+              console.log(tahun);
+              res.filter((item) => {
+                  // let tes = item.periode_tahun_id.toString()
+                  return item.periode_tahun_id.toString().includes(tahun);
+                }).map((value, key) => {
+                  $.getJSON(value.filegeo, function(data) {
+                      geoLayer = L.geoJson(data, {
+                        style: function(feature) {
+                            return {
+                                "color": value.warna,
+                                "weight": 1,
+                                "fillOpacity": 0.8,
+                            }
+                        },
+                      }).addTo(map);
+                      geoLayer.eachLayer(function(layer) {
+                              layer.bindPopup(`<span>Kec. : ${value.nama_kecamatan}</span><br><span>Total Kasus : ${value.total_kasus}</span>`);
+                          });
+                  });
+                })
+            }
+        });
+        });
+  });
 </script>
 @endsection
